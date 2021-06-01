@@ -47,6 +47,16 @@ client.connect(err => {
   });
 
   
+  // dublicate email check 
+  app.get("/emailCheck", (req, res) => {
+    const email = req.query.email;
+    appointmentCollection
+      .find({ email })
+      .toArray((err, documents) => {
+        res.send(documents);
+      });
+  });
+
   app.get('/allAppointments', (req, res) => {
     appointmentCollection.find({})
     .toArray((err, documents) => {
